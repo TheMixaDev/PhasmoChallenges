@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="random.js"></script>
+        <script src="lib.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900'>
+        <link rel="stylesheet" href="./glow.css">
+        <link rel="stylesheet" href="./button.css">
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <section class="cards" id="playerCard" style="display: none;">
+            <div class="card unknown1 animated" id="card1" onclick="unhide(1)"></div>
+            <div class="card unknown2 animated" id="card2" onclick="unhide(2)"></div>
+            <div class="card unknown3 animated" id="card3" onclick="unhide(3)"></div>
+            <div class="card unknown4 animated" id="card4" onclick="unhide(4)"></div>
+        </section>
+        <section class="cards" id="mapCard" style="display: none;">
+            <div class="card unknown4 animated" id="cardMap" onclick="unhideMap()"></div>
+        </section>
+        <div class="menu" id="menu" style="display: block; opacity: 0.85;">
+            <div id="achieveCard" style="display: none;">
+                <h1 id="achieveHeader">ПОЛУЧЕНА КАРТА</h1>
+                <h1 id="diff" style="display: none;">Сложность: </h1>
+                <h1 id="map" style="display: none;">Мапа: </h1>
+                <h1 id="challengesHeader">Челленджи:</h1>
+                <ul class="challenges" id="challenges">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul><br>
+                <button class="bubbly-button" onclick="nextAction();">Продолжить</button>
+            </div>
+            <div id="starter">
+                <h1 id="achieveHeader">Выберите количество игроков</h1>
+                <button class="bubbly-button" onclick="generate(1);">1</button>
+                <button class="bubbly-button" onclick="generate(2);">2</button>
+                <button class="bubbly-button" onclick="generate(3);">3</button>
+                <button class="bubbly-button" onclick="generate(4);">4</button>
+            </div>
+        </div>
+        <script src="script.js"></script>
+        <script src="act.js"></script>
+    </body>
+</html>
