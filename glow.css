@@ -1,5 +1,5 @@
 :root {
-  --back: url(https://static.wikia.nocookie.net/phasmophobia/images/1/10/%21Cards.png);
+  --back: url(card.png);
 }
 
 .card {
