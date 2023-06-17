@@ -32,6 +32,9 @@ class Card {
             return this.beforeFinish(decks, deck, index);
         return deck;
     }
+    clone() {
+        return new Card(this.name, this.stacks, this.beforeFinish);
+    }
 }
 class CardDeck {
     constructor() {
@@ -47,7 +50,7 @@ class CardDeck {
     addCard(card) {
         if(!this.isStackable(card))
             return false;
-        this.cards.push(card);
+        this.cards.push(card.clone());
         return true;
     }
     stringify() {
@@ -79,7 +82,7 @@ const Cards = [
                 continue;
             if(card.name == name)
                 continue;
-            deck.cards.push(card);
+            deck.cards.push(card.clone());
             return deck;
         }
     }),
@@ -193,14 +196,17 @@ function generateMapDeck(playerDecks) {
         }
     }
     if(needCards != 1 && random.percentage(Chances.MAP.SWAP)) {
-        if(random.percentage(0)) {
+        if(random.percentage(50)) {
             deck.addCard(new Card(`Игрок ${random.number(1,needCards)} выбирает с кем поменять свои челленджи.`));
         } else {
             let player = random.number(1,needCards);
             let card = random.arrayElement(Cards);
             while(!playerDecks[player-1].isStackable(card))
                 card = random.arrayElement(Cards);
-            deck.addCard(new Card(`Игрок ${player} может добавить любой челлендж игроку, и получить "${card.name}"`));
+            let tempDeck = new CardDeck();
+            tempDeck.cards.push(card.clone());
+            tempDeck = CardDeck.finish([tempDeck], tempDeck);
+            deck.addCard(new Card(`Игрок ${player} может добавить любой челлендж игроку, и получить "${tempDeck.cards[0].name}"`));
         }
     }
     deck = CardDeck.finish([deck], deck);

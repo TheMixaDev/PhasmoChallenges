@@ -3,6 +3,8 @@ let lastIndex = -1;
 let showedCards = 0;
 let needCards = 4;
 let mapShown = false;
+let animationTimeout = -1;
+let menuActive = false;
 
 function oninit() {
     Lib.BubblyButton();
@@ -33,6 +35,13 @@ function e(id) {
     return document.getElementById(id);
 }
 function unhide(index) {
+    if(animationTimeout > -1) {
+        clearInterval(animationTimeout);
+        animationTimeout = -1;
+        showedCards++;
+        nextAction();
+        if(index == lastIndex) return;
+    }
     let id = "card"+index;
     if(!e(id).getAttribute("class").includes("unknown"))
         return;
@@ -43,12 +52,14 @@ function unhide(index) {
     if(amount == 2) rarity = "rare";
     if(amount == 1) rarity = "common";
     e(id).setAttribute("class", "card "+rarity+" animated locked");
-    setTimeout(()=>{
+    animationTimeout = setTimeout(()=>{
+        animationTimeout = -1;
         e(id).classList.remove("locked");
         e("achieveCard").style.cssText = "display: block";
         e("challenges").innerHTML = parseChallenges(data.PLAYERS[index-1].cards);
         e("menu").style.cssText = "display: block;";
         showedCards++;
+        menuActive = true;
         setTimeout(()=>{
             e("menu").style.opacity = 0.85;
         },100)
@@ -79,6 +90,7 @@ function unhideMap() {
         if(data.MAP.DECK.cards.length == 0)
             e("challengesHeader").style.cssText = "display: none;";
         showedCards++;
+        menuActive = true;
         setTimeout(()=>{
             e("menu").style.opacity = 0.85;
         },100)
@@ -98,10 +110,13 @@ function nextAction() {
         e("cardMap").innerHTML = "<div class='cardHelper'><ul class='cardUl'><li>"+data.MAP.NAME+"</li><li>"+DiffsTranslate[data.MAP.DIFF]+"</li><br>"+parseChallenges(data.MAP.DECK.cards)+"</ul></div>";
         e("cardMap").classList.add("unhidden");
     }
-    e("menu").style.opacity = 0;
-    setTimeout(()=>{
-        e("menu").style.display = "none";
-    },300);
+    if(menuActive) {
+        e("menu").style.opacity = 0;
+        setTimeout(()=>{
+            menuActive = false;
+            e("menu").style.display = "none";
+        },300);
+    }
     if(showedCards == needCards) {
         e("mapCard").style.cssText = "display: flex;";
         setTimeout(()=>{
