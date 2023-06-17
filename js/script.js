@@ -13,7 +13,8 @@ const StackType = {
 }
 const RequirementType = {
     MULTIPLAYER: 1,
-    DISCORD: 2
+    DISCORD: 2,
+    HARDMODE: 3
 }
 let Flags = []
 const _v = ()=>{};
@@ -170,7 +171,9 @@ const Chances = {
             NIGHTMARE: 60,
             MADNESS: 10,
 
-            DOUBLE: 15
+            DOUBLE: 15,
+
+            HARDMODE_CARD: 50
         },
         SWAP: 5,
         VOICE_8BIT: 10,
@@ -196,6 +199,8 @@ function generatePlayerDeck() {
             random.percentage(Chances.PLAYER.QUAD) ? 4 : 3
         ) : 2
     ) : 1;
+    if(Flags.includes(RequirementType.HARDMODE))
+        i++;
     while(i > 0) {
         if(deck.addCard(pickCard(deck, Cards)))
             i--;
@@ -205,17 +210,21 @@ function generatePlayerDeck() {
 
 function generateMapDeck(playerDecks) {
     let deck = new CardDeck();
-    let diff = random.percentage(Chances.MAP.DIFF.PROFESSIONAL) ? Diffs.PROFESSIONAL :
-    (random.percentage(Chances.MAP.DIFF.NIGHTMARE) ? Diffs.NIGHTMARE : 
-    (random.percentage(Chances.MAP.DIFF.MADNESS) ? Diffs.MADNESS : Diffs.RANDOM));
-    if(Flags.includes(RequirementType.DISCORD) && random.percentage(Chances.MAP.VOICE_8BIT))
+    let diff = random.percentage(Chances.MAP.DIFF.PROFESSIONAL / (Flags.includes(RequirementType.HARDMODE) ? 2 : 1)) ? Diffs.PROFESSIONAL :
+    (random.percentage(Chances.MAP.DIFF.NIGHTMARE / (Flags.includes(RequirementType.HARDMODE) ? 1.3 : 1)) ? Diffs.NIGHTMARE : 
+    (random.percentage(Chances.MAP.DIFF.MADNESS * (Flags.includes(RequirementType.HARDMODE) ? 1.2 : 1)) ? Diffs.MADNESS : Diffs.RANDOM));
+    if(Flags.includes(RequirementType.DISCORD) && random.percentage(Chances.MAP.VOICE_8BIT * (Flags.includes(RequirementType.HARDMODE) ? 1.5 : 1)))
         deck.addCard(new Card("8-бит"));
-    if(diff != Diffs.RANDOM && random.percentage(Chances.MAP.MODIFY[diff])) {
-        let i = random.percentage(Chances.MAP.MODIFY.DOUBLE) ? 2 : 1;
-        while(i > 0) {
-            if(deck.addCard(pickCard(deck, MapCards)))
-                i--;
-        }
+    let i = 0;
+    if(diff != Diffs.RANDOM) {
+        if(random.percentage(Chances.MAP.MODIFY[diff] * (Flags.includes(RequirementType.HARDMODE) ? 1.2 : 1)))
+            i = random.percentage(Chances.MAP.MODIFY.DOUBLE) ? 2 : 1;
+        if(Flags.includes(RequirementType.HARDMODE) && random.percentage(Chances.MAP.MODIFY.HARDMODE_CARD))
+            i++;
+    }
+    while(i > 0) {
+        if(deck.addCard(pickCard(deck, MapCards)))
+            i--;
     }
     if(Flags.includes(RequirementType.MULTIPLAYER) && random.percentage(Chances.MAP.SWAP)) {
         if(random.percentage(50)) {

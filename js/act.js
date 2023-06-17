@@ -14,11 +14,13 @@ function oninit() {
 
     // apply options
     e("discordCheckbox").checked = options.discord ? true : false;
+    e("hardmodeCheckbox").checked = options.hardmode ? true : false;
 }
 function getOptions() {
     if(localStorage.getItem("options") == null) {
         let options = {
-            discord: true
+            discord: true,
+            hardmode: false,
         };
         localStorage.setItem("options", JSON.stringify(options))
     }
@@ -32,10 +34,12 @@ function toggleOption(option) {
     saveOptions();
 }
 function generate(players) {
+    if(options.hardmode)
+        Flags.push(RequirementType.HARDMODE);
     if(players > 1) {
         Flags.push(RequirementType.MULTIPLAYER);
         if(options.discord)
-        Flags.push(RequirementType.DISCORD);
+            Flags.push(RequirementType.DISCORD);
     }
     data = generateFull(players);
     needCards = players;
@@ -99,9 +103,9 @@ function unhideMap() {
     if(data.MAP.DIFF == Diffs.MADNESS || data.MAP.DIFF == Diffs.RANDOM) rarity += 2;
     rarity += data.MAP.DECK.cards.length;
     let textRarity = "common";
-    if(rarity == 1) textRarity = "rare";
-    if(rarity == 2) textRarity = "legendary";
-    if(rarity > 2) textRarity = "special";
+    if(rarity == 2) textRarity = "rare";
+    if(rarity == 3) textRarity = "legendary";
+    if(rarity > 3) textRarity = "special";
     e("cardMap").setAttribute("class", "card "+textRarity+" animated locked");
     mapShown = true;
     setTimeout(()=>{
