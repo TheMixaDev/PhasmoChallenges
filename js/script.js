@@ -10,13 +10,13 @@ const StackType = {
         SCREAM: 901,
         FLASHLIGHT: 902
     },
-}
+};
 const RequirementType = {
     MULTIPLAYER: 1,
     DISCORD: 2,
     HARDMODE: 3
-}
-let Flags = []
+};
+let Flags = [];
 const _v = ()=>{};
 class Card {
     constructor(name, stacks, beforeFinish, requirement) {
@@ -103,14 +103,17 @@ const Cards = [
     new Card(getLang("CARD_VOICE_ACTIVATION"), [StackType.VOICE]),
     new Card(getLang("CARD_SCREAMER"), [StackType.VOICE, StackType.SPECIAL.SCREAM]),
     new Card(getLang("CARD_VOICE_LIMITER"), [StackType.VOICE], (decks, deck, index)=>{
-        deck.cards[index].name = deck.cards[index].name.replace("{NUM}", random.number(1,15));
+        deck.cards[index].name = deck.cards[index].name.replace("{NUM}", random.number(1,15) + (Flags.includes(RequirementType.HARDMODE) ? 0 : 10));
         return deck;
     }, [RequirementType.MULTIPLAYER]),
-    new Card(getLang("CARD_SILENCE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
-    new Card(getLang("CARD_WORD_PER_MINUTE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
+    new Card(getLang("CARD_SILENCE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.HARDMODE]),
+    new Card(getLang("CARD_WORD_PER_MINUTE"), [StackType.VOICE], (decks, deck, index)=>{
+        deck.cards[index].name = deck.cards[index].name.replace("{NUM}", Flags.includes(RequirementType.HARDMODE) ? random.number(1,3) : 3);
+        return deck;
+    }, [RequirementType.MULTIPLAYER]),
     new Card(getLang("CARD_SOUNDPAD"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD]),
 
-    new Card(getLang("CARD_GHOSTMATE"), [StackType.MOVEMENT]),
+    new Card(getLang("CARD_GHOSTMATE"), [StackType.MOVEMENT], false, [RequirementType.HARDMODE]),
     new Card(getLang("CARD_PHOTO_HUNT"), [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
     new Card(getLang("CARD_AFK_HUNT"), [StackType.MOVEMENT]),
     new Card(getLang("CARD_NO_HIDING"), [StackType.MOVEMENT]),
@@ -118,7 +121,7 @@ const Cards = [
     new Card(getLang("CARD_NO_DOORS"), [StackType.MOVEMENT]),
     new Card(getLang("CARD_ROMANTIC_DINNER"), [StackType.MOVEMENT]),
 
-    new Card(getLang("CARD_LIGHTER"), [StackType.LIGHT]),
+    new Card(getLang("CARD_LIGHTER"), [StackType.LIGHT], false, [RequirementType.HARDMODE]),
     new Card(getLang("CARD_ELECTRONIC"), [StackType.LIGHT, StackType.SPECIAL.FLASHLIGHT]),
     new Card(getLang("CARD_NO_LIGHT"), [StackType.LIGHT]),
 

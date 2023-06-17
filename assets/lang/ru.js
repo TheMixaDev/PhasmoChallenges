@@ -15,7 +15,7 @@ Lang.RU = {
     CARD_SCREAMER: "Орать во время охоты",
     CARD_VOICE_LIMITER: "{NUM} слов на всю игру",
     CARD_SILENCE: "Молчать всю игру",
-    CARD_WORD_PER_MINUTE: "3 слова в минуту",
+    CARD_WORD_PER_MINUTE: "{NUM} слов в минуту",
     CARD_SOUNDPAD: "Soundpad",
     CARD_GHOSTMATE: "Жить в \"ареале обитания\" призрака после его нахождения",
     CARD_PHOTO_HUNT: "Идти фотографировать призрака во время охоты",

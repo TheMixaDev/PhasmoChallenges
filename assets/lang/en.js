@@ -15,7 +15,7 @@ Lang.EN = {
     CARD_SCREAMER: "Yell during the hunt",
     CARD_VOICE_LIMITER: "{NUM} words for the whole game",
     CARD_SILENCE: "Keep silent the whole game",
-    CARD_WORD_PER_MINUTE: "3 words per minute",
+    CARD_WORD_PER_MINUTE: "{NUM} words per minute",
     CARD_SOUNDPAD: "Soundpad",
     CARD_GHOSTMATE: "Live in the area of the ghost",
     CARD_PHOTO_HUNT: "Take a photo of the ghost during the hunt",
