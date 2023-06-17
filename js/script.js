@@ -85,8 +85,8 @@ class CardDeck {
     }
 }
 const Cards = [
-    new Card("Не пользоваться благовонием"),
-    new Card("Орущий следует за вами", [StackType.SPECIAL.SCREAM], (decks, deck, index)=>{
+    new Card(getLang("CARD_NO_SMUDGESTICK")),
+    new Card(getLang("CARD_SCREAMER_FOLLOW"), [StackType.SPECIAL.SCREAM], (decks, deck, index)=>{
         for(let i of decks) {
             for(let j of i.cards) {
                 if(j.stacks.includes(StackType.SPECIAL.SCREAM) && j.name != deck.cards[index].name)
@@ -98,61 +98,59 @@ const Cards = [
         deck.addCard(card);
         return deck;
     }, [RequirementType.MULTIPLAYER]),
-    new Card("Сбрасывать все вещи в начале охоты", [StackType.SPECIAL.PHOTO, StackType.SPECIAL.FLASHLIGHT]),
+    new Card(getLang("CARD_ITEM_DROP"), [StackType.SPECIAL.PHOTO, StackType.SPECIAL.FLASHLIGHT]),
     
-    new Card("Активация по голосу", [StackType.VOICE]),
-    new Card("Орать во время охоты", [StackType.VOICE, StackType.SPECIAL.SCREAM]),
-    new Card("{NUM} слов на всю игру", [StackType.VOICE], (decks, deck, index)=>{
+    new Card(getLang("CARD_VOICE_ACTIVATION"), [StackType.VOICE]),
+    new Card(getLang("CARD_SCREAMER"), [StackType.VOICE, StackType.SPECIAL.SCREAM]),
+    new Card(getLang("CARD_VOICE_LIMITER"), [StackType.VOICE], (decks, deck, index)=>{
         deck.cards[index].name = deck.cards[index].name.replace("{NUM}", random.number(1,15));
         return deck;
     }, [RequirementType.MULTIPLAYER]),
-    new Card("Молчать всю игру", [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
-    new Card("3 слова в минуту", [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
-    new Card("Soundpad", [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD]),
+    new Card(getLang("CARD_SILENCE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
+    new Card(getLang("CARD_WORD_PER_MINUTE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
+    new Card(getLang("CARD_SOUNDPAD"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD]),
 
-    new Card("Жить в \"ареале обитания\" призрака после его нахождения", [StackType.MOVEMENT]),
-    new Card("Идти фотографировать призрака во время охоты", [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
-    new Card("АФК во время охоты", [StackType.MOVEMENT]),
-    new Card("Не пользоваться укрытиями", [StackType.MOVEMENT]),
-    new Card("30 секунд в каждой комнате", [StackType.MOVEMENT]),
-    new Card("Не открывать двери", [StackType.MOVEMENT]),
-    new Card("\"Романтический ужин\"", [StackType.MOVEMENT]),
+    new Card(getLang("CARD_GHOSTMATE"), [StackType.MOVEMENT]),
+    new Card(getLang("CARD_PHOTO_HUNT"), [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
+    new Card(getLang("CARD_AFK_HUNT"), [StackType.MOVEMENT]),
+    new Card(getLang("CARD_NO_HIDING"), [StackType.MOVEMENT]),
+    new Card(getLang("CARD_AFK_ROOM"), [StackType.MOVEMENT]),
+    new Card(getLang("CARD_NO_DOORS"), [StackType.MOVEMENT]),
+    new Card(getLang("CARD_ROMANTIC_DINNER"), [StackType.MOVEMENT]),
 
-    new Card("Освещать путь только зажигалкой", [StackType.LIGHT]),
-    new Card("Ходить с включенной электроникой во время охоты", [StackType.LIGHT, StackType.SPECIAL.FLASHLIGHT]),
-    new Card("Без фонариков и камеры", [StackType.LIGHT]),
+    new Card(getLang("CARD_LIGHTER"), [StackType.LIGHT]),
+    new Card(getLang("CARD_ELECTRONIC"), [StackType.LIGHT, StackType.SPECIAL.FLASHLIGHT]),
+    new Card(getLang("CARD_NO_LIGHT"), [StackType.LIGHT]),
 
-    new Card("Играть с 2 слотами (неизменяемые)", [StackType.ITEMS]),
-    new Card("1 слот (изменяемый)", [StackType.ITEMS]),
-    new Card("\"Фотограф\"", [StackType.ITEMS]),
-    new Card("Симулятор вора", [StackType.ITEMS]),
+    new Card(getLang("CARD_2_SLOTS"), [StackType.ITEMS]),
+    new Card(getLang("CARD_1_SLOT"), [StackType.ITEMS]),
+    new Card(getLang("CARD_PHOTO"), [StackType.ITEMS]),
+    new Card(getLang("CARD_THIEF"), [StackType.ITEMS]),
 ]
 const MapCards = [
     new Card("{WEATHER}", [], (decks, deck, index)=>{
-        deck.cards[index].name = "Погода: "+random.arrayElement(["Туман", "Ливень", "Снег"]);
+        deck.cards[index].name = getLang("MAPCARD_WEATHER_LABEL")+random.arrayElement([
+            getLang("MAPCARD_WEATHER_FOG"),
+            getLang("MAPCARD_WEATHER_RAIN"),
+            getLang("MAPCARD_WEATHER_SNOW")
+        ]);
         return deck;
     }),
-    new Card("Без бега"),
-    new Card("0 рассудка+таблетки"),
-    new Card("0 безопасный период"),
-    new Card("150% призрак"),
-    new Card("75% игроки"),
-    new Card("Без улик"),
-    new Card("Сломанный рубильник"),
-    new Card("Без закупа", [StackType.ITEMS]),
-    new Card("Без распятий", [StackType.ITEMS]),
+    new Card(getLang("MAPCARD_NO_RUNNING")),
+    new Card(getLang("MAPCARD_NO_SANITY")),
+    new Card(getLang("MAPCARD_NO_GRACE")),
+    new Card(getLang("MAPCARD_FAST_GHOST")),
+    new Card(getLang("MAPCARD_SLOW_PLAYER")),
+    new Card(getLang("MAPCARD_NO_EVIDENCE")),
+    new Card(getLang("MAPCARD_NO_BREAKER")),
+    new Card(getLang("MAPCARD_STARTER_ITEMS"), [StackType.ITEMS]),
+    new Card(getLang("MAPCARD_NO_CRUCIFIX"), [StackType.ITEMS]),
 ]
 const Diffs = {
     PROFESSIONAL: "PROFESSIONAL",
     NIGHTMARE: "NIGHTMARE",
     MADNESS: "MADNESS",
     RANDOM: "RANDOM"
-}
-const DiffsTranslate = {
-    PROFESSIONAL: "ПРОФЕССИОНАЛ",
-    NIGHTMARE: "КОШМАР",
-    MADNESS: "БЕЗУМИЕ",
-    RANDOM: "АБСОЛЮТНО СЛУЧАЙНАЯ"
 }
 const Chances = {
     PLAYER: {
@@ -177,7 +175,7 @@ const Chances = {
         },
         SWAP: 5,
         VOICE_8BIT: 10,
-        ARRAY: ["Палатки", "Дома 6 и 42", "Дома 10 и 13", "Фермерские дома", "Школа и тюрьма", "Sunny Meadows"]
+        ARRAY: getLang("MAP_ARRAY")
     }
 }
 
@@ -214,7 +212,7 @@ function generateMapDeck(playerDecks) {
     (random.percentage(Chances.MAP.DIFF.NIGHTMARE / (Flags.includes(RequirementType.HARDMODE) ? 1.3 : 1)) ? Diffs.NIGHTMARE : 
     (random.percentage(Chances.MAP.DIFF.MADNESS * (Flags.includes(RequirementType.HARDMODE) ? 1.2 : 1)) ? Diffs.MADNESS : Diffs.RANDOM));
     if(Flags.includes(RequirementType.DISCORD) && random.percentage(Chances.MAP.VOICE_8BIT * (Flags.includes(RequirementType.HARDMODE) ? 1.5 : 1)))
-        deck.addCard(new Card("8-бит"));
+        deck.addCard(new Card(getLang("MAPCARD_8BIT")));
     let i = 0;
     if(diff != Diffs.RANDOM) {
         if(random.percentage(Chances.MAP.MODIFY[diff] * (Flags.includes(RequirementType.HARDMODE) ? 1.2 : 1)))
@@ -228,14 +226,14 @@ function generateMapDeck(playerDecks) {
     }
     if(Flags.includes(RequirementType.MULTIPLAYER) && random.percentage(Chances.MAP.SWAP)) {
         if(random.percentage(50)) {
-            deck.addCard(new Card(`Игрок ${random.number(1,needCards)} выбирает с кем поменять свои челленджи.`));
+            deck.addCard(new Card(getLang("CUSTOM_SWAP").replace("{PLAYER}", random.number(1,needCards))));
         } else {
             let player = random.number(1,needCards);
             let card = pickCard(playerDecks[player-1], Cards);
             if(card != null) {
                 let tempDeck = CardDeck.fromSingleCard(card);
                 tempDeck = CardDeck.finish([tempDeck], tempDeck);
-                deck.addCard(new Card(`Игрок ${player} может добавить любой челлендж игроку, и получить "${tempDeck.cards[0].name}"`));
+                deck.addCard(new Card(getLang("CUSTOM_SWAP").replace("{PLAYER}", player).replace("{CARD}", tempDeck.cards[0].name)));
             }
         }
     }

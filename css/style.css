@@ -37,3 +37,19 @@
 .cards {
     transition: .3s;
 }
+.flag_block {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.flag {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    padding: 10px;
+}
+@media (max-width: 780px) {
+    .flag_block {
+        position: static!important;
+    }
+}

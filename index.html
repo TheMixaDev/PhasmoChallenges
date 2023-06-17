@@ -10,6 +10,14 @@
         <link rel="stylesheet" href="./css/checkbox.css">
         <link rel="stylesheet" href="./css/button.css">
         <link rel="stylesheet" href="./css/style.css">
+        <title>Phasmo Challenges</title>
+
+        <script src="./js/lang.js"></script>
+        <script src="./assets/lang/ru.js"></script>
+        <script src="./assets/lang/en.js"></script>
+        <script>
+            init_lang();
+        </script>
     </head>
     <body>
         <section class="cards" id="playerCard" style="display: none;">
@@ -23,31 +31,31 @@
         </section>
         <div class="menu" id="menu" style="display: block; opacity: 0.85;">
             <div id="achieveCard" style="display: none;">
-                <h1 id="achieveHeader">ПОЛУЧЕНА КАРТА</h1>
-                <h1 id="diff" style="display: none;">Сложность: </h1>
-                <h1 id="map" style="display: none;">Мапа: </h1>
-                <h1 id="challengesHeader">Челленджи:</h1>
-                <ul class="challenges" id="challenges">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                </ul><br>
-                <button class="bubbly-button" onclick="nextAction();">Продолжить</button>
+                <h1 id="achieveHeader">ACHIEVE_HEADER</h1>
+                <h1 id="diff" style="display: none;"></h1>
+                <h1 id="map" style="display: none;"></h1>
+                <h1 id="challengesHeader">CHALLENGES</h1>
+                <ul class="challenges" id="challenges"></ul><br>
+                <button class="bubbly-button" onclick="nextAction();" id="continueButton">CONTINUE</button>
             </div>
             <div id="starter">
-                <h1 id="achieveHeader">Выберите количество игроков</h1>
+                <div class="flag_block">
+                    <img src="./assets/flags/en.png" class="flag" onclick="changeLanguage('EN')">
+                    <img src="./assets/flags/ru.png" class="flag" onclick="changeLanguage('RU')">
+                </div>
+                <h1 id="pickHeader">PICK_HEADER</h1>
                 <button class="bubbly-button" onclick="generate(1);">1</button>
                 <button class="bubbly-button" onclick="generate(2);">2</button>
                 <button class="bubbly-button" onclick="generate(3);">3</button>
                 <button class="bubbly-button" onclick="generate(4);">4</button>
                 <br>
                 <div style="display: inline-block;">
-                    <label>Discord</label>
+                    <label id="discordLabel">DISCORD</label>
                     <input class="tgl tgl-ios" id="discordCheckbox" type="checkbox" />
                     <label class="tgl-btn" for="discordCheckbox" onclick="toggleOption('discord')"></label>
                 </div>
                 <div style="display: inline-block;">
-                    <label>Хардмод</label>
+                    <label id="hardmodeLabel">HARDMODE</label>
                     <input class="tgl tgl-ios" id="hardmodeCheckbox" type="checkbox"/>
                     <label class="tgl-btn" for="hardmodeCheckbox" onclick="toggleOption('hardmode')"></label>
                 </div>
@@ -55,5 +63,8 @@
         </div>
         <script src="./js/script.js"></script>
         <script src="./js/act.js"></script>
+        <script>
+            localizeDOMElements();
+        </script>
     </body>
 </html>

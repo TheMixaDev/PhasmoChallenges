@@ -112,9 +112,9 @@ function unhideMap() {
         e("cardMap").classList.remove("locked");
         e("achieveCard").style.cssText = "display: block";
         e("challenges").innerHTML = parseChallenges(data.MAP.DECK.cards);
-        e("diff").innerHTML = "Сложность: "+DiffsTranslate[data.MAP.DIFF];
+        e("diff").innerHTML = getLang("DIFF")+getLang(data.MAP.DIFF);
         e("diff").style.display = "block";
-        e("map").innerHTML = "Карта: "+data.MAP.NAME;
+        e("map").innerHTML = getLang("MAP")+data.MAP.NAME;
         e("map").style.display = "block";
         e("menu").style.cssText = "display: block;";
         if(data.MAP.DECK.cards.length == 0)
@@ -137,7 +137,7 @@ function nextAction() {
         e("card"+lastIndex).innerHTML = "<div class='cardHelper'><ul class='cardUl'>"+parseChallenges(data.PLAYERS[lastIndex-1].cards)+"</ul></div>";
         e("card"+lastIndex).classList.add("unhidden");
     } else {
-        e("cardMap").innerHTML = "<div class='cardHelper'><ul class='cardUl'><li>"+data.MAP.NAME+"</li><li>"+DiffsTranslate[data.MAP.DIFF]+"</li><br>"+parseChallenges(data.MAP.DECK.cards)+"</ul></div>";
+        e("cardMap").innerHTML = "<div class='cardHelper'><ul class='cardUl'><li>"+data.MAP.NAME+"</li><li>"+getLang(data.MAP.DIFF)+"</li><br>"+parseChallenges(data.MAP.DECK.cards)+"</ul></div>";
         e("cardMap").classList.add("unhidden");
     }
     if(menuActive) {
