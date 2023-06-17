@@ -15,12 +15,14 @@ function oninit() {
     // apply options
     e("discordCheckbox").checked = options.discord ? true : false;
     e("hardmodeCheckbox").checked = options.hardmode ? true : false;
+    e("novoiceCheckbox").checked = options.novoice ? true : false;
 }
 function getOptions() {
     if(localStorage.getItem("options") == null) {
         let options = {
             discord: true,
             hardmode: false,
+            novoice: false
         };
         localStorage.setItem("options", JSON.stringify(options))
     }
@@ -36,6 +38,8 @@ function toggleOption(option) {
 function generate(players) {
     if(options.hardmode)
         Flags.push(RequirementType.HARDMODE);
+    if(!options.novoice)
+        Flags.push(RequirementType.VOICE);
     if(players > 1) {
         Flags.push(RequirementType.MULTIPLAYER);
         if(options.discord)
@@ -138,6 +142,7 @@ function nextAction() {
     if(!mapShown) {
         e("card"+lastIndex).innerHTML = "<div class='cardHelper'><ul class='cardUl'>"+parseChallenges(data.PLAYERS[lastIndex-1].cards)+"</ul></div>";
         e("card"+lastIndex).classList.add("unhidden");
+        e("card"+lastIndex).classList.remove("locked");
     } else {
         e("cardMap").innerHTML = "<div class='cardHelper'><ul class='cardUl'><li>"+data.MAP.NAME+"</li><li>"+getLang(data.MAP.DIFF)+"</li><br>"+parseChallenges(data.MAP.DECK.cards)+"</ul></div>";
         e("cardMap").classList.add("unhidden");

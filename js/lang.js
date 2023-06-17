@@ -21,6 +21,7 @@ function localizeDOMElements() {
     e("pickHeader").innerHTML = getLang("PICK_HEADER");
     e("discordLabel").innerHTML = getLang("DISCORD");
     e("hardmodeLabel").innerHTML = getLang("HARDMODE");
+    e("novoiceLabel").innerHTML = getLang("NO_VOICE");
 }
 function changeLanguage(lang) {
     localStorage.setItem("lang", lang);

@@ -17,6 +17,7 @@
   height: 2em;
   position: relative;
   cursor: pointer;
+  margin: auto;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;

@@ -7,6 +7,7 @@ Lang.RU = {
     PICK_HEADER: "Выберите количество игроков",
     DISCORD: "Discord",
     HARDMODE: "Хардмод",
+    NO_VOICE: "Без модов голоса",
 
     CARD_NO_SMUDGESTICK: "Без благовоний",
     CARD_SCREAMER_FOLLOW: "Орущий следует за вами",

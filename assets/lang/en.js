@@ -7,6 +7,7 @@ Lang.EN = {
     PICK_HEADER: "Select the number of players",
     DISCORD: "Discord",
     HARDMODE: "Hardmode",
+    NO_VOICE: "No voice mods",
     
     CARD_NO_SMUDGESTICK: "No smudgesticks",
     CARD_SCREAMER_FOLLOW: "The \"yeller\" follows you",

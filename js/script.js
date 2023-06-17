@@ -14,7 +14,8 @@ const StackType = {
 const RequirementType = {
     MULTIPLAYER: 1,
     DISCORD: 2,
-    HARDMODE: 3
+    HARDMODE: 3,
+    VOICE: 4
 };
 let Flags = [];
 const _v = ()=>{};
@@ -105,13 +106,13 @@ const Cards = [
     new Card(getLang("CARD_VOICE_LIMITER"), [StackType.VOICE], (decks, deck, index)=>{
         deck.cards[index].name = deck.cards[index].name.replace("{NUM}", random.number(1,15) + (Flags.includes(RequirementType.HARDMODE) ? 0 : 10));
         return deck;
-    }, [RequirementType.MULTIPLAYER]),
-    new Card(getLang("CARD_SILENCE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.HARDMODE]),
+    }, [RequirementType.MULTIPLAYER, RequirementType.VOICE]),
+    new Card(getLang("CARD_SILENCE"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.HARDMODE, RequirementType.VOICE]),
     new Card(getLang("CARD_WORD_PER_MINUTE"), [StackType.VOICE], (decks, deck, index)=>{
         deck.cards[index].name = deck.cards[index].name.replace("{NUM}", Flags.includes(RequirementType.HARDMODE) ? random.number(1,3) : 3);
         return deck;
-    }, [RequirementType.MULTIPLAYER]),
-    new Card(getLang("CARD_SOUNDPAD"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD]),
+    }, [RequirementType.MULTIPLAYER, RequirementType.VOICE]),
+    new Card(getLang("CARD_SOUNDPAD"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD, RequirementType.VOICE]),
 
     new Card(getLang("CARD_GHOSTMATE"), [StackType.MOVEMENT], false, [RequirementType.HARDMODE]),
     new Card(getLang("CARD_PHOTO_HUNT"), [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
