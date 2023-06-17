@@ -84,7 +84,6 @@ const Cards = [
         }
     }),
     new Card("Сбрасывать все вещи в начале охоты", [StackType.SPECIAL.PHOTO, StackType.SPECIAL.FLASHLIGHT]),
-    new Card("Минута в каждой входимой комнате", [StackType.SPECIAL.PHOTO]),
     
     new Card("Активация по голосу", [StackType.VOICE]),
     new Card("Орать во время охоты", [StackType.VOICE, StackType.SPECIAL.SCREAM]),
@@ -100,6 +99,9 @@ const Cards = [
     new Card("Идти фотографировать призрака во время охоты", [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
     new Card("АФК во время охоты", [StackType.MOVEMENT]),
     new Card("Не пользоваться укрытиями", [StackType.MOVEMENT]),
+    new Card("Минута в каждой входимой комнате", [StackType.MOVEMENT]),
+    new Card("Не открывать двери", [StackType.MOVEMENT]),
+    new Card("\"Романтический ужин\"", [StackType.MOVEMENT]),
 
     new Card("Освещать путь только зажигалкой", [StackType.LIGHT]),
     new Card("Ходить с включенной электроникой во время охоты", [StackType.LIGHT, StackType.SPECIAL.FLASHLIGHT]),
@@ -107,10 +109,12 @@ const Cards = [
 
     new Card("Играть с 2 слотами (без свапа)", [StackType.ITEMS]),
     new Card("1 слот (свапаемый)", [StackType.ITEMS]),
+    new Card("\"Фотограф\"", [StackType.ITEMS]),
+    new Card("Симулятор вора", [StackType.ITEMS]),
 ]
 const MapCards = [
     new Card("{WEATHER}", [], (decks, deck, index)=>{
-        deck.cards[index].name = "Погода: "+random.arrayElement(["Дождь", "Ливень", "Снег"]);
+        deck.cards[index].name = "Погода: "+random.arrayElement(["Туман", "Ливень", "Снег"]);
         return deck;
     }),
     new Card("Без бега"),
