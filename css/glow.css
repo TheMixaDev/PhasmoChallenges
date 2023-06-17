@@ -76,14 +76,14 @@
   filter: saturate(1.5);
 }
 .card.legendary {
-  --color1: #ffdd00;
-  --color2: #ffdd00;
+  --color1: #ff00f7;
+  --color2: #ff00f7;
   --front: var(--back);
   filter: saturate(1.5);
 }
 .card.special {
-  --color1: #ff00f7;
-  --color2: #ff00f7;
+  --color1: #ffdd00;
+  --color2: #ffdd00;
   --front: var(--back);
   filter: saturate(1.5);
 }
