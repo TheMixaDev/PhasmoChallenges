@@ -6,11 +6,37 @@ let mapShown = false;
 let animationTimeout = -1;
 let menuActive = false;
 
+let options = getOptions();
+
 function oninit() {
     Lib.BubblyButton();
     Lib.AnimatedCards();
+
+    // apply options
+    e("discordCheckbox").checked = options.discord ? true : false;
+}
+function getOptions() {
+    if(localStorage.getItem("options") == null) {
+        let options = {
+            discord: true
+        };
+        localStorage.setItem("options", JSON.stringify(options))
+    }
+    return JSON.parse(localStorage.getItem("options"));
+}
+function saveOptions() {
+    localStorage.setItem("options", JSON.stringify(options))
+}
+function toggleOption(option) {
+    options[option] = !options[option];
+    saveOptions();
 }
 function generate(players) {
+    if(players > 1) {
+        Flags.push(RequirementType.MULTIPLAYER);
+        if(options.discord)
+        Flags.push(RequirementType.DISCORD);
+    }
     data = generateFull(players);
     needCards = players;
     console.log(data);

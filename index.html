@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900'>
         <link rel="stylesheet" href="./css/glow.css">
+        <link rel="stylesheet" href="./css/checkbox.css">
         <link rel="stylesheet" href="./css/button.css">
         <link rel="stylesheet" href="./css/style.css">
     </head>
@@ -39,6 +40,17 @@
                 <button class="bubbly-button" onclick="generate(2);">2</button>
                 <button class="bubbly-button" onclick="generate(3);">3</button>
                 <button class="bubbly-button" onclick="generate(4);">4</button>
+                <br>
+                <div style="display: inline-block;">
+                    <label>Discord</label>
+                    <input class="tgl tgl-ios" id="discordCheckbox" type="checkbox" />
+                    <label class="tgl-btn" for="discordCheckbox" onclick="toggleOption('discord')"></label>
+                </div>
+                <!--div style="display: inline-block;">
+                    <label>Хардмод</label>
+                    <input class="tgl tgl-ios" id="hardmodeCheckbox" type="checkbox"/>
+                    <label class="tgl-btn" for="hardmodeCheckbox"></label>
+                </div-->
             </div>
         </div>
         <script src="./js/script.js"></script>

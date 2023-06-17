@@ -11,12 +11,18 @@ const StackType = {
         FLASHLIGHT: 902
     },
 }
+const RequirementType = {
+    MULTIPLAYER: 1,
+    DISCORD: 2
+}
+let Flags = []
 const _v = ()=>{};
 class Card {
-    constructor(name, stacks, beforeFinish) {
+    constructor(name, stacks, beforeFinish, requirement) {
         this.name = name;
         this.stacks = stacks == undefined ? [] : stacks;
         this.beforeFinish = beforeFinish == undefined ? false : beforeFinish;
+        this.requirement = requirement == undefined ? [] : requirement;
     }
     isStackable(card) {
         if(card.name == this.name)
@@ -35,6 +41,11 @@ class Card {
     clone() {
         return new Card(this.name, this.stacks, this.beforeFinish);
     }
+    checkFlags() {
+        for(let flag of this.requirement)
+            if(!Flags.includes(flag)) return false;
+        return true;
+    }
 }
 class CardDeck {
     constructor() {
@@ -48,6 +59,8 @@ class CardDeck {
         return true;
     }
     addCard(card) {
+        if(card == null) // lock mechanism
+            return true;
         if(!this.isStackable(card))
             return false;
         this.cards.push(card.clone());
@@ -64,6 +77,11 @@ class CardDeck {
             deck = deck.cards[i].finish(decks, deck, i);
         return deck;
     }
+    static fromSingleCard(card) {
+        let tempDeck = new CardDeck();
+        tempDeck.addCard(card);
+        return tempDeck;
+    }
 }
 const Cards = [
     new Card("Не пользоваться благовонием"),
@@ -74,18 +92,11 @@ const Cards = [
                     return deck;
             }
         }
-        let name = deck.cards[index].name;
+        let card = pickCard(deck, Cards);
         deck.cards.splice(index, 1);
-        while(true) {
-            let card = random.arrayElement(Cards);
-            if(!deck.isStackable(card))
-                continue;
-            if(card.name == name)
-                continue;
-            deck.cards.push(card.clone());
-            return deck;
-        }
-    }),
+        deck.addCard(card);
+        return deck;
+    }, [RequirementType.MULTIPLAYER]),
     new Card("Сбрасывать все вещи в начале охоты", [StackType.SPECIAL.PHOTO, StackType.SPECIAL.FLASHLIGHT]),
     
     new Card("Активация по голосу", [StackType.VOICE]),
@@ -93,16 +104,16 @@ const Cards = [
     new Card("{NUM} слов на всю игру", [StackType.VOICE], (decks, deck, index)=>{
         deck.cards[index].name = deck.cards[index].name.replace("{NUM}", random.number(1,15));
         return deck;
-    }),
-    new Card("Молчать всю игру", [StackType.VOICE]),
-    new Card("3 слова в минуту", [StackType.VOICE]),
-    new Card("Soundpad", [StackType.VOICE]),
+    }, [RequirementType.MULTIPLAYER]),
+    new Card("Молчать всю игру", [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
+    new Card("3 слова в минуту", [StackType.VOICE], false, [RequirementType.MULTIPLAYER]),
+    new Card("Soundpad", [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD]),
 
     new Card("Жить в \"ареале обитания\" призрака после его нахождения", [StackType.MOVEMENT]),
     new Card("Идти фотографировать призрака во время охоты", [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
     new Card("АФК во время охоты", [StackType.MOVEMENT]),
     new Card("Не пользоваться укрытиями", [StackType.MOVEMENT]),
-    new Card("Минута в каждой входимой комнате", [StackType.MOVEMENT]),
+    new Card("30 секунд в каждой комнате", [StackType.MOVEMENT]),
     new Card("Не открывать двери", [StackType.MOVEMENT]),
     new Card("\"Романтический ужин\"", [StackType.MOVEMENT]),
 
@@ -110,8 +121,8 @@ const Cards = [
     new Card("Ходить с включенной электроникой во время охоты", [StackType.LIGHT, StackType.SPECIAL.FLASHLIGHT]),
     new Card("Без фонариков и камеры", [StackType.LIGHT]),
 
-    new Card("Играть с 2 слотами (без свапа)", [StackType.ITEMS]),
-    new Card("1 слот (свапаемый)", [StackType.ITEMS]),
+    new Card("Играть с 2 слотами (неизменяемые)", [StackType.ITEMS]),
+    new Card("1 слот (изменяемый)", [StackType.ITEMS]),
     new Card("\"Фотограф\"", [StackType.ITEMS]),
     new Card("Симулятор вора", [StackType.ITEMS]),
 ]
@@ -125,7 +136,7 @@ const MapCards = [
     new Card("0 безопасный период"),
     new Card("150% призрак"),
     new Card("75% игроки"),
-    new Card("0 улик"),
+    new Card("Без улик"),
     new Card("Сломанный рубильник"),
     new Card("Без закупа", [StackType.ITEMS]),
     new Card("Без распятий", [StackType.ITEMS]),
@@ -167,6 +178,17 @@ const Chances = {
     }
 }
 
+function pickCard(deck, cards) {
+    for(let i = 0; i < 1000; i++) { // Try to pick a card 1000 times
+        let card = random.arrayElement(cards);
+        if(!deck.isStackable(card) || !card.checkFlags())
+            continue;
+        return card;
+    }
+    console.log("Wow - Unable to pick a card in 1000 attempts");
+    return null;
+}
+
 function generatePlayerDeck() {
     let deck = new CardDeck();
     let i = random.percentage(Chances.PLAYER.DOUBLE) ? (
@@ -175,7 +197,7 @@ function generatePlayerDeck() {
         ) : 2
     ) : 1;
     while(i > 0) {
-        if(deck.addCard(random.arrayElement(Cards)))
+        if(deck.addCard(pickCard(deck, Cards)))
             i--;
     }
     return deck;
@@ -186,27 +208,26 @@ function generateMapDeck(playerDecks) {
     let diff = random.percentage(Chances.MAP.DIFF.PROFESSIONAL) ? Diffs.PROFESSIONAL :
     (random.percentage(Chances.MAP.DIFF.NIGHTMARE) ? Diffs.NIGHTMARE : 
     (random.percentage(Chances.MAP.DIFF.MADNESS) ? Diffs.MADNESS : Diffs.RANDOM));
-    if(random.percentage(Chances.MAP.VOICE_8BIT))
+    if(Flags.includes(RequirementType.DISCORD) && random.percentage(Chances.MAP.VOICE_8BIT))
         deck.addCard(new Card("8-бит"));
     if(diff != Diffs.RANDOM && random.percentage(Chances.MAP.MODIFY[diff])) {
         let i = random.percentage(Chances.MAP.MODIFY.DOUBLE) ? 2 : 1;
         while(i > 0) {
-            if(deck.addCard(random.arrayElement(MapCards)))
+            if(deck.addCard(pickCard(deck, MapCards)))
                 i--;
         }
     }
-    if(needCards != 1 && random.percentage(Chances.MAP.SWAP)) {
+    if(Flags.includes(RequirementType.MULTIPLAYER) && random.percentage(Chances.MAP.SWAP)) {
         if(random.percentage(50)) {
             deck.addCard(new Card(`Игрок ${random.number(1,needCards)} выбирает с кем поменять свои челленджи.`));
         } else {
             let player = random.number(1,needCards);
-            let card = random.arrayElement(Cards);
-            while(!playerDecks[player-1].isStackable(card))
-                card = random.arrayElement(Cards);
-            let tempDeck = new CardDeck();
-            tempDeck.cards.push(card.clone());
-            tempDeck = CardDeck.finish([tempDeck], tempDeck);
-            deck.addCard(new Card(`Игрок ${player} может добавить любой челлендж игроку, и получить "${tempDeck.cards[0].name}"`));
+            let card = pickCard(playerDecks[player-1], Cards);
+            if(card != null) {
+                let tempDeck = CardDeck.fromSingleCard(card);
+                tempDeck = CardDeck.finish([tempDeck], tempDeck);
+                deck.addCard(new Card(`Игрок ${player} может добавить любой челлендж игроку, и получить "${tempDeck.cards[0].name}"`));
+            }
         }
     }
     deck = CardDeck.finish([deck], deck);
