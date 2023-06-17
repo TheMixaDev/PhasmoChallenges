@@ -41,8 +41,8 @@ function generate(players) {
         if(options.discord)
             Flags.push(RequirementType.DISCORD);
     }
-    data = generateFull(players);
     needCards = players;
+    data = generateFull(players);
     console.log(data);
     let removeIndexes = [1,2,3,4];
     for(let i = 0; i < players; i++)
@@ -77,7 +77,8 @@ function unhide(index) {
         return;
     lastIndex = index;
     let amount = data.PLAYERS[index-1].cards.length;
-    let rarity = "special";
+    let rarity = "death";
+    if(amount == 4) rarity = "special";
     if(amount == 3) rarity = "legendary";
     if(amount == 2) rarity = "rare";
     if(amount == 1) rarity = "common";
@@ -105,7 +106,8 @@ function unhideMap() {
     let textRarity = "common";
     if(rarity == 2) textRarity = "rare";
     if(rarity == 3) textRarity = "legendary";
-    if(rarity > 3) textRarity = "special";
+    if(rarity == 4) textRarity = "special";
+    if(rarity > 4) textRarity = "death";
     e("cardMap").setAttribute("class", "card "+textRarity+" animated locked");
     mapShown = true;
     setTimeout(()=>{

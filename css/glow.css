@@ -61,8 +61,8 @@
 }
 
 .card.common {
-  --color1: #00f7ff;
-  --color2: #00f7ff;
+  --color1: #ffffff;
+  --color2: #ffffff;
   --front: var(--back);
   filter: saturate(1.5);
 }
@@ -70,8 +70,8 @@
   --front: ""!important;
 }
 .card.rare {
-  --color1: #b567fa;
-  --color2: #b567fa;
+  --color1: #006aff;
+  --color2: #006aff;
   --front: var(--back);
   filter: saturate(1.5);
 }
@@ -82,6 +82,12 @@
   filter: saturate(1.5);
 }
 .card.special {
+  --color1: #ff00f7;
+  --color2: #ff00f7;
+  --front: var(--back);
+  filter: saturate(1.5);
+}
+.card.death {
   --color1: #ff0000;
   --color2: #ff0000;
   --front: var(--back);
