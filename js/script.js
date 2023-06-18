@@ -97,6 +97,7 @@ const Cards = [
         let card = pickCard(deck, Cards);
         deck.cards.splice(index, 1);
         deck.addCard(card);
+        deck = card.finish(decks, deck, deck.cards.length-1);
         return deck;
     }, [RequirementType.MULTIPLAYER]),
     new Card(getLang("CARD_ITEM_DROP"), [StackType.SPECIAL.PHOTO, StackType.SPECIAL.FLASHLIGHT]),
