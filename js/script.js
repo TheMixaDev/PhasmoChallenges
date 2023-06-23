@@ -8,7 +8,8 @@ const StackType = {
     SPECIAL: {
         PHOTO: 900,
         SCREAM: 901,
-        FLASHLIGHT: 902
+        FLASHLIGHT: 902,
+        AREAL: 903
     },
 };
 const RequirementType = {
@@ -115,7 +116,7 @@ const Cards = [
     }, [RequirementType.MULTIPLAYER, RequirementType.VOICE]),
     new Card(getLang("CARD_SOUNDPAD"), [StackType.VOICE], false, [RequirementType.MULTIPLAYER, RequirementType.DISCORD, RequirementType.VOICE]),
 
-    new Card(getLang("CARD_GHOSTMATE"), [StackType.MOVEMENT], false, [RequirementType.HARDMODE]),
+    new Card(getLang("CARD_GHOSTMATE"), [StackType.MOVEMENT, StackType.SPECIAL.AREAL], false, [RequirementType.HARDMODE]),
     new Card(getLang("CARD_PHOTO_HUNT"), [StackType.MOVEMENT, StackType.SPECIAL.PHOTO]),
     new Card(getLang("CARD_AFK_HUNT"), [StackType.MOVEMENT]),
     new Card(getLang("CARD_NO_HIDING"), [StackType.MOVEMENT]),
@@ -129,8 +130,8 @@ const Cards = [
 
     new Card(getLang("CARD_2_SLOTS"), [StackType.ITEMS]),
     new Card(getLang("CARD_1_SLOT"), [StackType.ITEMS]),
-    new Card(getLang("CARD_PHOTO"), [StackType.ITEMS]),
-    new Card(getLang("CARD_THIEF"), [StackType.ITEMS]),
+    new Card(getLang("CARD_PHOTO"), [StackType.ITEMS, StackType.SPECIAL.AREAL]),
+    new Card(getLang("CARD_THIEF"), [StackType.ITEMS, StackType.SPECIAL.AREAL]),
 ]
 const MapCards = [
     new Card("{WEATHER}", [], (decks, deck, index)=>{
