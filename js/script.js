@@ -103,7 +103,7 @@ const Cards = [
     }, [RequirementType.MULTIPLAYER]),
     new Card(getLang("CARD_ITEM_DROP"), [StackType.SPECIAL.PHOTO, StackType.SPECIAL.FLASHLIGHT]),
     
-    new Card(getLang("CARD_VOICE_ACTIVATION"), [StackType.VOICE]),
+    new Card(getLang("CARD_VOICE_ACTIVATION"), [StackType.VOICE], false, [RequirementType.VOICE]),
     new Card(getLang("CARD_SCREAMER"), [StackType.VOICE, StackType.SPECIAL.SCREAM]),
     new Card(getLang("CARD_VOICE_LIMITER"), [StackType.VOICE], (decks, deck, index)=>{
         deck.cards[index].name = deck.cards[index].name.replace("{NUM}", random.number(1,15) + (Flags.includes(RequirementType.HARDMODE) ? 0 : 10));
