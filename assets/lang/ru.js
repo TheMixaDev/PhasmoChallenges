@@ -45,6 +45,7 @@ Lang.RU = {
     MAPCARD_NO_BREAKER: "Сломанный рубильник",
     MAPCARD_STARTER_ITEMS: "Без закупа",
     MAPCARD_NO_CRUCIFIX: "Без распятий",
+    MAPCARD_SAME_SKIN: "У всех одинаковый скин",
     MAPCARD_8BIT: "8 бит",
 
     PROFESSIONAL: "ПРОФЕССИОНАЛ",

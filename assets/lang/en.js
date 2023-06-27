@@ -46,6 +46,7 @@ Lang.EN = {
     MAPCARD_STARTER_ITEMS: "Starter items",
     MAPCARD_NO_CRUCIFIX: "No crucifixes",
     MAPCARD_8BIT: "8-bit",
+    MAPCARD_SAME_SKIN: "Same skin for everybody",
     
     PROFESSIONAL: "PROFESSIONAL",
     NIGHTMARE: "NIGHTMARE",

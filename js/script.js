@@ -151,6 +151,7 @@ const MapCards = [
     new Card(getLang("MAPCARD_NO_BREAKER")),
     new Card(getLang("MAPCARD_STARTER_ITEMS"), [StackType.ITEMS]),
     new Card(getLang("MAPCARD_NO_CRUCIFIX"), [StackType.ITEMS]),
+    new Card(getLang("MAPCARD_SAME_SKIN"), [], false, [RequirementType.MULTIPLAYER]),
 ]
 const Diffs = {
     PROFESSIONAL: "PROFESSIONAL",
