@@ -7,12 +7,12 @@ __"PhasmoChallenges"__ is an alternative to tweaking Phasmophobia challenges thr
 > - __Hardmode:__ An increased number of challenges per player, an additional 50% chance of one more challenge appearing in the card of the map, increased chances of higher standard difficulties
 > - __No voice mods:__ Exclusion of cards on limits for communication.
 2. After selecting the number of players, cards appear on the screen, each of which has hidden challenges for the player. Each player chooses which card he wants to take and the host opens this card by mouseclick. When you click on each card, an animation is played with the illumination of the card, depending on the number of challenges in it. After the animation, all players see the challenges received by the player.
-> __Colors:__
+> __Rarities and colors:__
 > - __Common:__ White, 1 challenge, normal mode only
-> - __Rare:__ BLUE, 2 challenges
-> - __Special:__ PINK, 3 challenges
-> - __Legendary:__ GOLD, 4 challenges
-> - __Death:__ RED, 5 challenges, hardmode only
+> - __Rare:__ Blue, 2 challenges
+> - __Special:__ Pink, 3 challenges
+> - __Legendary:__ Gold, 4 challenges
+> - __Death:__ Red, 5 challenges, hardmode only
 3. After all the players have seen their challenges, a card appears in which the Custom Game modifiers are indicated, as well as maps to choose from and the name of the difficulty. The glow of the card depends on the level of difficulty and the number of challenges.
 4. After completing the game, refresh the page (F5) to get new challenges for the next game. Good luck!
 ## Challenges
