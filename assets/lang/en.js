@@ -50,10 +50,10 @@ Lang.EN = {
     
     PROFESSIONAL: "PROFESSIONAL",
     NIGHTMARE: "NIGHTMARE",
-    MADNESS: "MADNESS",
+    MADNESS: "INSANITY",
     RANDOM: "ABSOLUTELY RANDOM",
     MAP_ARRAY: ["Camps", "Houses 6 and 42", "Houses 10 and 13", "Farmhouses", "School and Prison", "Sunny Meadows"],
     
-    CUSTOM_SWAP: "The player {PLAYER} chooses with whom to change their challenges.",
+    CUSTOM_SWAP: "The player {PLAYER} chooses with whom to swap their challenges.",
     CUSTOM_ADD: `A player {PLAYER} can add any challenge to a player, and get a "{CARD}"`
 }
