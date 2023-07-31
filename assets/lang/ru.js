@@ -32,6 +32,7 @@ Lang.RU = {
     CARD_1_SLOT: "1 слот (изменяемый)",
     CARD_PHOTO: "\"Фотограф\"",
     CARD_THIEF: "Симулятор вора",
+    CARD_NO_SOUNDS: "Играть без звука",
     MAPCARD_WEATHER_LABEL: "Погода: ",
     MAPCARD_WEATHER_FOG: "Туман",
     MAPCARD_WEATHER_RAIN: "Ливень",

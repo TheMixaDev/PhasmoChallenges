@@ -32,6 +32,7 @@ Lang.EN = {
     CARD_1_SLOT: "1 slot (changeable)",
     CARD_PHOTO: "\"Photographer\"",
     CARD_THIEF: "Thief Simulator",
+    CARD_NO_SOUNDS: "Turn off game sounds",
     MAPCARD_WEATHER_LABEL: "Weather: ",
     MAPCARD_WEATHER_FOG: "Fog",
     MAPCARD_WEATHER_RAIN: "Heavy rain",

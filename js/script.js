@@ -132,6 +132,8 @@ const Cards = [
     new Card(getLang("CARD_1_SLOT"), [StackType.ITEMS]),
     new Card(getLang("CARD_PHOTO"), [StackType.ITEMS, StackType.SPECIAL.AREAL]),
     new Card(getLang("CARD_THIEF"), [StackType.ITEMS, StackType.SPECIAL.AREAL]),
+
+    new Card(getLang("CARD_NO_SOUNDS"), [], false, [RequirementType.HARDMODE]),
 ]
 const MapCards = [
     new Card("{WEATHER}", [], (decks, deck, index)=>{
