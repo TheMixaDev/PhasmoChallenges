@@ -182,7 +182,7 @@ const Chances = {
 
             HARDMODE_CARD: 50
         },
-        SWAP: 5,
+        SWAP: 10,
         VOICE_8BIT: 10,
         ARRAY: getLang("MAP_ARRAY")
     }
@@ -242,7 +242,7 @@ function generateMapDeck(playerDecks) {
             if(card != null) {
                 let tempDeck = CardDeck.fromSingleCard(card);
                 tempDeck = CardDeck.finish([tempDeck], tempDeck);
-                deck.addCard(new Card(getLang("CUSTOM_SWAP").replace("{PLAYER}", player).replace("{CARD}", tempDeck.cards[0].name)));
+                deck.addCard(new Card(getLang("CUSTOM_ADD").replace("{PLAYER}", player).replace("{CARD}", tempDeck.cards[0].name)));
             }
         }
     }
